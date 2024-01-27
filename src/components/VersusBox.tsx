@@ -75,13 +75,16 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
       {winners === "third" && <h2 className='text-2xl'>Third Place</h2>}
       {winners ?
         droppedTeam1 ? <Team teamName={droppedTeam1.name} fromBox={boxNumber} /> :
-          <div
-            className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
-            onDrop={handleOnDrop1}
-            onDragOver={handleOnDragOver}
-            onDragEnter={handleDragEnter1}
-            onDragLeave={handleDragLeave1}
-          ></div>
+        <div
+        className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
+        onDrop={handleOnDrop1}
+        onDragOver={handleOnDragOver}
+        onDragEnter={handleDragEnter1}
+        onDragLeave={handleDragLeave1}
+        >
+
+          {boxNumber}
+        </div>
 
         :
 

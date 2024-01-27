@@ -2,6 +2,7 @@ import Column from './components/Column';
 import { MapProvider } from './Context/MapContext';
 import Final from './components/Final';
 import html2canvas from 'html2canvas';
+import SideBar from './components/SideBar';
 
 function App() {
   const handleImageDownload = async () => {
@@ -21,6 +22,29 @@ function App() {
     }
   };
 
+  const handleImageShare = async () => {
+    const element = document.getElementById('print-image');
+
+    if (element) {
+      try {
+        const canvas = await html2canvas(element);
+        const imgData = canvas.toDataURL('image/png');
+
+        if (navigator.share) {
+          await navigator.share({
+            files: [new File([imgData], 'tournament_image.png', { type: 'image/png' })],
+            title: 'Africa Cup of Nations 2024',
+            text: 'Check out my predictions for the Africa Cup of Nations 2024!',
+          });
+        } else {
+          console.error('Web Share API not supported');
+        }
+      } catch (error) {
+        console.error('Error generating image:', error);
+      }
+    }
+  };
+
   const styles = {
     root: {
       fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
@@ -34,22 +58,24 @@ function App() {
 
   return (
     <MapProvider>
-      <div id='print-image' style={styles.root} className='flex items-center justify-between h-screen'>
-        <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />
+      <div className="flex flex-col items-center h-screen" style={styles.root}>
+        <SideBar handleImageDownload={handleImageDownload} handleImageShare={handleImageShare} />
+        <div id='print-image' style={styles.root} className='flex items-center justify-between h-screen w-full'>
+          <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />
 
-        <Column matchesCount={2} countStart={9} />
+          <Column matchesCount={2} countStart={9} />
 
-        <Column matchesCount={1} countStart={13} />
+          <Column matchesCount={1} countStart={13} />
 
-        <Final />
+          <Final />
 
-        <Column matchesCount={1} countStart={14} />
+          <Column matchesCount={1} countStart={14} />
 
-        <Column matchesCount={2} countStart={11} />
+          <Column matchesCount={2} countStart={11} />
 
-        <Column matchesCount={4} roundTeams={['GIN', 'GNQ', 'COD', 'EGY', 'CIV', 'SEN', 'BFA', 'MLI']} countStart={5} />
+          <Column matchesCount={4} roundTeams={['GIN', 'GNQ', 'COD', 'EGY', 'CIV', 'SEN', 'BFA', 'MLI']} countStart={5} />
 
-        <button onClick={handleImageDownload}>Download</button>
+        </div>
       </div>
     </MapProvider>
   );
