@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import reactLogo from '../assets/react.svg';
+import Flag from './Flag';
+
 interface IProps {
   teamName: string,
   fromBox: number,
@@ -34,7 +35,7 @@ const Team = ({teamName, fromBox}: IProps) => {
       onDragEnd={handleDragEnd}
     >
       
-      <img src={reactLogo} className='w-8 h-8 select-none' alt='React logo' draggable="false" />
+      <Flag teamName={teamName}/>
       <p className='select-none' draggable="false">{teamName}</p>
     
     </div>

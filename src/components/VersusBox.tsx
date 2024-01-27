@@ -35,6 +35,7 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
 
   const handleOnDrop1 = (e: React.DragEvent) => {
     e.preventDefault()
+    setIsDragOver1(false);
     const data = e.dataTransfer.getData("text/plain")
     let team = JSON.parse(data);
     if (map.get(team.fromBox) !== boxNumber) {
@@ -45,11 +46,11 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
     }
 
     setDroppedTeam1(team);
-    setIsDragOver1(false);
   }
 
   const handleOnDrop2 = (e: React.DragEvent) => {
     e.preventDefault()
+    setIsDragOver2(false);
     const data = e.dataTransfer.getData("text/plain")
     let team = JSON.parse(data);
     if (map.get(team.fromBox) !== boxNumber) {
@@ -60,7 +61,6 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
       return;
     }
     setDroppedTeam2(team);
-    setIsDragOver2(false);
   }
 
   const handleDragEnter1 = (e: React.DragEvent) => {
