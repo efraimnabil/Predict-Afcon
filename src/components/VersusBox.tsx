@@ -9,8 +9,8 @@ interface IProps {
 }
 
 const VersusBox = ({team1, team2, boxNumber}: IProps) => {
-  const [droppedTeam1, setDroppedTeam1] = useState<string | null>(null);
-  const [droppedTeam2, setDroppedTeam2] = useState<string | null>(null);
+  const [droppedTeam1, setDroppedTeam1] = useState<{name: string, fromBox: number} | null>(null);
+  const [droppedTeam2, setDroppedTeam2] = useState<{name: string, fromBox: number} | null>(null);
   const [isDragOver1, setIsDragOver1] = useState(false);
   const [isDragOver2, setIsDragOver2] = useState(false);
 
@@ -40,7 +40,11 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
     if (map.get(team.fromBox) !== boxNumber) {
       return;
     }
-    setDroppedTeam1(team.name);
+    if(droppedTeam2?.fromBox === team.fromBox) {
+      return;
+    }
+
+    setDroppedTeam1(team);
     setIsDragOver1(false);
   }
 
@@ -51,7 +55,11 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
     if (map.get(team.fromBox) !== boxNumber) {
       return;
     }
-    setDroppedTeam2(team.name);
+
+    if(droppedTeam1?.fromBox === team.fromBox) {
+      return;
+    }
+    setDroppedTeam2(team);
     setIsDragOver2(false);
   }
 
@@ -82,7 +90,7 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
         <Team teamName={team1} fromBox={boxNumber} />
         : 
         droppedTeam1 ?
-          <Team teamName={droppedTeam1} fromBox={boxNumber} />
+          <Team teamName={droppedTeam1.name} fromBox={boxNumber} />
           :
           <div 
             className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`} onDrop={handleOnDrop1} 
@@ -99,7 +107,7 @@ const VersusBox = ({team1, team2, boxNumber}: IProps) => {
         <Team teamName={team2} fromBox={boxNumber} />
         : 
         droppedTeam2 ?
-          <Team teamName={droppedTeam2} fromBox={boxNumber} />
+          <Team teamName={droppedTeam2.name} fromBox={boxNumber} />
           :
           <div 
             className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver2 ? 'border-green-500' : 'border-dotted'}`} onDrop={handleOnDrop2} 
