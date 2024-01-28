@@ -9,7 +9,6 @@ const Final = ({}: IProps) => {
     <div className="flex justify-around">
         <VersusBox boxNumber={16} winners="winner" />
         <VersusBox boxNumber={15} final={true} />
-        <VersusBox boxNumber={17} winners="third" />
     </div>
   )
 }

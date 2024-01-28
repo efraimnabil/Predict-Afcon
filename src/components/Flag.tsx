@@ -51,7 +51,7 @@ const Flag = ({teamName}: IProps) => {
         <img
             src={flag[teamName]}
             alt={teamName}
-            className='w-12'
+            className='w-10'
             draggable="false"
             onLoad={handleLoad}
             style={{ display: isLoaded ? 'initial' : 'none' }}

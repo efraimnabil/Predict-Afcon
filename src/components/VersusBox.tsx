@@ -72,7 +72,6 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
   return (
     <div className='flex flex-col items-center justify-center m-1 border border-gray-400 rounded-lg'>
       {winners === "winner" && <h2 className='text-xl'>Winner</h2>}
-      {winners === "third" && <h2 className='text-xl'>Third</h2>}
       {winners ?
         droppedTeam1 ? <Team teamName={droppedTeam1.name} fromBox={boxNumber} /> :
         <div
@@ -88,7 +87,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
         :
 
         <>
-          {final && <h2 className='text-2xl'>Final</h2>}
+          {final && <h2 className='text-xl'>Final</h2>}
           <div className={`flex ${boxNumber >= 9 ? "flex-row" : "flex-col"} items-center justify-center`}>
             {team1 ?
               <Team teamName={team1} fromBox={boxNumber} />
