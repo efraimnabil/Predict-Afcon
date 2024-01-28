@@ -46,6 +46,10 @@ const Flag = ({teamName}: IProps) => {
         SEN: SEN,
         ZAF: ZAF,
     }
+
+    const handleContextMenu = (e: React.MouseEvent) => {
+        e.preventDefault();
+    }
   
     return (
         <img
@@ -55,6 +59,7 @@ const Flag = ({teamName}: IProps) => {
             draggable="false"
             onLoad={handleLoad}
             style={{ display: isLoaded ? 'initial' : 'none' }}
+            onContextMenu={handleContextMenu}
         />
     );
 }
