@@ -71,11 +71,11 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
 
   return (
     <div className='flex flex-col items-center justify-center m-1 border border-gray-400 rounded-lg'>
-      {winners === "winner" && <h2 className='text-xl'>Winner</h2>}
+      {winners === "winner" && <p className=''>Winner</p>}
       {winners ?
         droppedTeam1 ? <Team teamName={droppedTeam1.name} fromBox={boxNumber} /> :
         <div
-        className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
+        className={`flex flex-col items-center justify-center p-7 m-1 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
         onDrop={handleOnDrop1}
         onDragOver={handleOnDragOver}
         onDragEnter={handleDragEnter1}
@@ -96,7 +96,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
                 <Team teamName={droppedTeam1.name} fromBox={boxNumber} />
                 :
                 <div
-                  className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
+                  className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
                   onDrop={handleOnDrop1}
                   onDragOver={handleOnDragOver}
                   onDragEnter={handleDragEnter1}
@@ -107,7 +107,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
             {final ?
               <img src={CUP} alt='cup' className='h-20' draggable="false" />
               :
-              <p className='text-sm font-bold'>VS</p>
+              <p className='text-sm'>VS</p>
             }
 
             {team2 ?
@@ -117,7 +117,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
                 <Team teamName={droppedTeam2.name} fromBox={boxNumber} />
                 :
                 <div
-                  className={`flex flex-col items-center justify-center p-7 m-3 border ${isDragOver2 ? 'border-green-500' : 'border-dotted'}`}
+                  className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver2 ? 'border-green-500' : 'border-dotted'}`}
                   onDrop={handleOnDrop2}
                   onDragOver={handleOnDragOver}
                   onDragEnter={handleDragEnter2}
