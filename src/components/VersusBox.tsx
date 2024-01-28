@@ -83,15 +83,13 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
         onDragLeave={handleDragLeave1}
         >
 
-          {boxNumber}
         </div>
 
         :
 
         <>
           {final && <h2 className='text-2xl'>Final</h2>}
-          {boxNumber}
-          <div className='flex flex-row items-center justify-center'>
+          <div className={`flex ${boxNumber === 15 || boxNumber === 14 || boxNumber === 13  ? "flex-row" : "flex-col"} items-center justify-center`}>
             {team1 ?
               <Team teamName={team1} fromBox={boxNumber} />
               :

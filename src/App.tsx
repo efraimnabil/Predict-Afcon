@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import SideBar from './components/SideBar';
 
 function App() {
+
   const handleImageDownload = async () => {
     const element = document.getElementById('print-image');
 
@@ -60,9 +61,10 @@ function App() {
 
   return (
     <MapProvider>
-      <div className="flex flex-col items-center h-screen" style={styles.root}>
+      <div className="flex flex-col items-center" style={styles.root}>
         <SideBar handleImageDownload={handleImageDownload} handleImageShare={handleImageShare} />
-        <div id='print-image' style={styles.root} className='flex items-center justify-between h-screen w-full'>
+        
+        <div id='print-image' style={styles.root} className='flex flex-col items-center justify-between w-full gap-8'>
           <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />
 
           <Column matchesCount={2} countStart={9} />
