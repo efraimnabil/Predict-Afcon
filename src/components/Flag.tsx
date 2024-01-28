@@ -49,6 +49,7 @@ const Flag = ({teamName}: IProps) => {
 
     const handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault();
+        
     }
   
     return (
@@ -56,7 +57,7 @@ const Flag = ({teamName}: IProps) => {
             src={flag[teamName]}
             alt={teamName}
             className='w-10'
-            draggable="false"
+            draggable
             onLoad={handleLoad}
             style={{ display: isLoaded ? 'initial' : 'none' }}
             onContextMenu={handleContextMenu}
