@@ -12,6 +12,7 @@ function App() {
       try {
         const canvas = await html2canvas(element);
         const imgData = canvas.toDataURL('image/png');
+        
         const link = document.createElement('a');
         link.href = imgData;
         link.download = 'tournament_image.png';
@@ -24,15 +25,16 @@ function App() {
 
   const handleImageShare = async () => {
     const element = document.getElementById('print-image');
-
+  
     if (element) {
       try {
         const canvas = await html2canvas(element);
         const imgData = canvas.toDataURL('image/png');
-
+        const blob = await fetch(imgData).then((res) => res.blob());
+  
         if (navigator.share) {
           await navigator.share({
-            files: [new File([imgData], 'tournament_image.png', { type: 'image/png' })],
+            files: [new File([blob], 'tournament_image.png', { type: 'image/png' })],
             title: 'Africa Cup of Nations 2024',
             text: 'Check out my predictions for the Africa Cup of Nations 2024!',
           });
