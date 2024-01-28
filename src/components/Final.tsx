@@ -6,7 +6,7 @@ interface IProps {
 
 const Final = ({}: IProps) => {
   return (
-    <div className="flex flex-col justify-around h-full">
+    <div className="flex justify-around">
         <VersusBox boxNumber={16} winners="winner" />
         <VersusBox boxNumber={15} final={true} />
         <VersusBox boxNumber={17} winners="third" />
