@@ -2,7 +2,7 @@ import Column from './components/Column';
 import { MapProvider } from './Context/MapContext';
 import Final from './components/Final';
 import html2canvas from 'html2canvas';
-import SideBar from './components/SideBar';
+import SideBar from './components/Navbar';
 
 function App() {
 
@@ -48,23 +48,12 @@ function App() {
     }
   };
 
-  const styles = {
-    root: {
-      fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
-      color: 'rgb(var(--foreground-rgb))',
-      background: `linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb))`,
-      '--foreground-rgb': '255, 255, 255',
-      '--background-start-rgb': '0, 0, 0',
-      '--background-end-rgb': '0, 0, 0',
-    },
-  };
-
   return (
     <MapProvider>
-      <div className="flex flex-col items-center" style={styles.root}>
+      <div className="flex flex-col items-center bg-black overflow-hidden">
         <SideBar handleImageDownload={handleImageDownload} handleImageShare={handleImageShare} />
         
-        <div id='print-image' style={styles.root} className='flex flex-col items-center justify-between w-full gap-8'>
+        <div id='print-image' className='flex flex-col items-center justify-between w-full gap-8 text-forground bg-black'>
           <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />
 
           <Column matchesCount={2} countStart={9} />
