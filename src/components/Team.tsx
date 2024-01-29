@@ -8,7 +8,6 @@ interface IProps {
 
 const Team = ({teamName, fromBox}: IProps) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [dropped, setDropped] = useState(false);
 
   const handleDragStart = (e: React.DragEvent) => {
     let team = {
@@ -23,13 +22,10 @@ const Team = ({teamName, fromBox}: IProps) => {
   const handleDragEnd = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    console.log('drag end');
-    setDropped(true);
-    console.log(dropped);
   }
   return (
     <div 
-      className={`relative flex flex-col items-center py-1 px-2 my-4 mx-2 border ${isDragging ? 'border-green-500' : 'border-white-30'} rounded-xl`}
+      className={`relative flex flex-col items-center py-1 px-2 my-4 mx-2 border ${isDragging ? 'border-green-500' : (fromBox === 16 ? 'border-primary' : 'border-white-30')} rounded-xl`}
       draggable
       onDragStart={handleDragStart} 
       onDragEnd={handleDragEnd}

@@ -8,10 +8,10 @@ interface IProps {
   team2?: string,
   boxNumber: number,
   final?: boolean,
-  winners?: string
+  winner?: boolean
 }
 
-const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
+const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
   const { map } = useMap();
   const [droppedTeam1, setDroppedTeam1] = useState<{ name: string, fromBox: number } | null>(null);
   const [droppedTeam2, setDroppedTeam2] = useState<{ name: string, fromBox: number } | null>(null);
@@ -70,12 +70,12 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center m-1 border border-white-30 rounded-lg'>
-      {winners === "winner" && <p className=''>Winner</p>}
-      {winners ?
+    <div className={`flex flex-col items-center justify-center m-1 border ${winner ? 'border-primary' : 'border-white-30'} rounded-xl`}>
+      {winner && <p className='p-2 text-primary'>Winner</p>}
+      {winner ?
         droppedTeam1 ? <Team teamName={droppedTeam1.name} fromBox={boxNumber} /> :
         <div
-        className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver1 ? 'border-green-500' : 'border-white-30'} rounded-xl`}
+        className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver1 ? 'border-green-500' : 'border-primary'} rounded-xl`}
         onDrop={handleOnDrop1}
         onDragOver={handleOnDragOver}
         onDragEnter={handleDragEnter1}
@@ -87,7 +87,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
         :
 
         <>
-          {final && <h2 className='text-xl'>Final</h2>}
+          {final && <h2 className='p-2'>Final</h2>}
           <div className={`flex ${boxNumber >= 9 ? "flex-row" : "flex-col"} items-center justify-center xl:flex-row`}>
             {team1 ?
               <Team teamName={team1} fromBox={boxNumber} />
