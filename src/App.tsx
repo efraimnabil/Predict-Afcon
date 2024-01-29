@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <MapProvider>
-        <div className="flex flex-col items-center bg-background overflow-hidden min-h-screen">
+        <div className="flex flex-col items-center bg-background overflow-hidden min-h-screen xl:h-screen">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/knockout" element={<KnockoutStage />} />

@@ -11,7 +11,7 @@ const KnockoutStage = ({}: IProps) => {
         <Navbar />
         <div 
           id='print-image' 
-          className='flex flex-col items-center justify-between w-full gap-4 text-forground bg-background'
+          className='flex flex-col items-center h-full w-full justify-between gap-4 text-forground bg-background xl:flex-row xl:px-5 xl:py-12 xl:h-full'
           >
           
           <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />

@@ -75,7 +75,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
       {winners ?
         droppedTeam1 ? <Team teamName={droppedTeam1.name} fromBox={boxNumber} /> :
         <div
-        className={`flex flex-col items-center justify-center p-7 m-1 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
+        className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver1 ? 'border-green-500' : 'border-dotted'}`}
         onDrop={handleOnDrop1}
         onDragOver={handleOnDragOver}
         onDragEnter={handleDragEnter1}
@@ -88,7 +88,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
 
         <>
           {final && <h2 className='text-xl'>Final</h2>}
-          <div className={`flex ${boxNumber >= 9 ? "flex-row" : "flex-col"} items-center justify-center`}>
+          <div className={`flex ${boxNumber >= 9 ? "flex-row" : "flex-col"} items-center justify-center xl:flex-row`}>
             {team1 ?
               <Team teamName={team1} fromBox={boxNumber} />
               :

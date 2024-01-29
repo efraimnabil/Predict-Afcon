@@ -8,7 +8,7 @@ interface IProps {
 
 const Column = ({matchesCount, roundTeams = [], countStart}: IProps) => {
   return (
-    <div className='flex justify-around h-full'>
+    <div className='flex justify-around w-full h-full xl:flex-col xl:w-auto'>
       {
         Array.from({ length: matchesCount }).map((_, index) => {
           const team1 = roundTeams.length > index * 2 ? roundTeams[index * 2] : undefined;
