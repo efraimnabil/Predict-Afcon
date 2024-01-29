@@ -29,7 +29,7 @@ const Team = ({teamName, fromBox}: IProps) => {
   }
   return (
     <div 
-      className={`relative flex flex-col items-center py-1 px-2 my-4 mx-2 border ${isDragging ? 'border-green-500' : 'border-gray-400'}`}
+      className={`relative flex flex-col items-center py-1 px-2 my-4 mx-2 border ${isDragging ? 'border-green-500' : 'border-white-30'} rounded-xl`}
       draggable
       onDragStart={handleDragStart} 
       onDragEnd={handleDragEnd}
