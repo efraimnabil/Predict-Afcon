@@ -1,8 +1,10 @@
-import Column from './components/Column';
+
 import { MapProvider } from './Context/MapContext';
-import Final from './components/Final';
 import html2canvas from 'html2canvas';
-import SideBar from './components/Navbar';
+import NavBar from './components/Navbar';
+import KnockoutStage from './components/KnockoutStage';
+import Home from './components/Home';
+
 
 function App() {
 
@@ -50,25 +52,10 @@ function App() {
 
   return (
     <MapProvider>
-      <div className="flex flex-col items-center bg-black overflow-hidden">
-        <SideBar handleImageDownload={handleImageDownload} handleImageShare={handleImageShare} />
+      <div className="flex flex-col items-center bg-background overflow-hidden min-h-screen">
+
+        <Home />
         
-        <div id='print-image' className='flex flex-col items-center justify-between w-full gap-8 text-forground bg-black'>
-          <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />
-
-          <Column matchesCount={2} countStart={9} />
-
-          <Column matchesCount={1} countStart={13} />
-
-          <Final />
-
-          <Column matchesCount={1} countStart={14} />
-
-          <Column matchesCount={2} countStart={11} />
-
-          <Column matchesCount={4} roundTeams={['GIN', 'GNQ', 'COD', 'EGY', 'CIV', 'SEN', 'BFA', 'MLI']} countStart={5} />
-
-        </div>
       </div>
     </MapProvider>
   );

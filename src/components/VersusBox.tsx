@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Team from "./Team"
-import CUP from '../assets/cup.png'
+import Cup from './UI/Cup'
 import { useMap } from './../Context/MapContext';
 
 interface IProps {
@@ -105,7 +105,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winners }: IProps) => {
             }
 
             {final ?
-              <img src={CUP} alt='cup' className='h-20' draggable="false" />
+              <Cup className='w-12' />
               :
               <p className='text-sm'>VS</p>
             }

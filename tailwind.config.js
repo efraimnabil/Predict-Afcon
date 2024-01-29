@@ -5,11 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {colors: {
+    extend: {
+      colors: {
       'forground': 'rgb(255, 255, 255)',
-      'background': 'rgb(0, 0, 0)',
-      'background-start-rgb': 'rgb(0, 0, 0)',
-      'background-end-rgb': 'rgb(0, 0, 0)',
+      'background': '#191B21',
+      'primary': '#D99E32',
+      'secondary': '#D9D9D9',
       },
     },
   },

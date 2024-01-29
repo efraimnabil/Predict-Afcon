@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Flag from './Flag';
+import Flag from './UI/Flag';
 
 interface IProps {
   teamName: string,
