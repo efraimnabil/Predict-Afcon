@@ -1,5 +1,5 @@
 import Cup from "./UI/Cup"
-
+import { Link } from "react-router-dom"
 interface IProps {
 
 }
@@ -20,9 +20,12 @@ const Home = ({}: IProps) => {
             </h3>
 
 
-            <button className="border border-primary text-primary rounded-3xl py-3 px-8 self-start md:text-xl">
+            <Link 
+                to="/knockout"
+                className="border border-primary text-primary rounded-3xl py-3 px-8 self-start md:text-xl"
+            >
                 Get Started
-            </button>
+            </Link>
         </div>
 
         <Cup className="w-36 sm:w-48 lg:w-72" />

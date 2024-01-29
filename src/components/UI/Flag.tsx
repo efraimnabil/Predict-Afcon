@@ -18,10 +18,9 @@ import ZAF from '../../assets/Flags/ZAF.png'
 
 interface IProps {
     teamName: string,
-    className?: string,
 }   
 
-const Flag = ({teamName, className}: IProps) => {
+const Flag = ({teamName}: IProps) => {
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -56,7 +55,7 @@ const Flag = ({teamName, className}: IProps) => {
         <img
             src={flag[teamName]}
             alt={teamName}
-            className={`${className} ? ${className} : 'w-10`}
+            className='w-10'
             draggable
             onLoad={handleLoad}
             style={{ display: isLoaded ? 'initial' : 'none' }}
