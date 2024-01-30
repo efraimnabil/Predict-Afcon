@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-
+import Button from "./UI/Button";
 interface IProps {
 
 }
@@ -50,16 +50,9 @@ const sideBar = ({}: IProps) => {
 
   return (
     <div className="flex items-center w-full my-2 justify-around">
-        <button 
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" 
-          onClick={handleImageShare}>
-            Share
-        </button>
-        <button 
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" 
-          onClick={handleImageDownload}>
-            Download
-        </button>
+        <Button buttonText='Reset' onClick={() => window.location.reload()} />
+        <Button buttonText='Share' onClick={handleImageShare} />
+        <Button buttonText='Download' onClick={handleImageDownload} />
     </div>
   )
 }
