@@ -7,6 +7,7 @@ interface IProps {
 const Home = ({}: IProps) => {
   return (
     <div className="relative flex flex-col p-4 mt-10 items-center gap-5 w-full lg:flex-row lg:py-10 lg:justify-around">
+        
         <div className="flex flex-col gap-3 lg:gap-10">
             <h1 className="text-primary text-2xl font-bold md:text-4xl">
                 Predict the results of the African Cup of Nations
@@ -27,7 +28,6 @@ const Home = ({}: IProps) => {
                 Get Started
             </Link>
         </div>
-
         <Cup className="w-36 sm:w-48 lg:w-72" />
 
     </div>

@@ -12,6 +12,8 @@ export default {
       'primary': '#D99E32',
       'secondary': '#D9D9D9',
       'white-30': 'rgba(255, 255, 255, 0.30)',
+      'white-10': 'rgba(255, 255, 255, 0.10)',
+      'black-50': 'rgba(0, 0, 0, 0.50)',
       },
     },
   },

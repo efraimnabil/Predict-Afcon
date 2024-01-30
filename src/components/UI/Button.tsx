@@ -6,7 +6,7 @@ interface IProps {
 const Button = ({buttonText, onClick}: IProps) => {
   return (
     <button
-        className="border border-primary text-primary text-sm rounded-3xl py-1 px-3 self-start md:text-xl xl:px-8 xl:py-2"
+        className="border border-primary text-primary text-sm rounded-3xl py-1 px-3 self-start md:text-xl xl:px-8 xl:py-2 hover:bg-primary hover:text-white"
         onClick={onClick}
         >
         {buttonText}

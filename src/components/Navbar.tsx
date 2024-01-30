@@ -1,10 +1,14 @@
 import html2canvas from "html2canvas";
 import Button from "./UI/Button";
+import { useState } from "react";
+import EmailRegister from "./EmailRegister";
 interface IProps {
 
 }
 
 const sideBar = ({}: IProps) => {
+
+  const [EmailRegisterOpen, setEmailRegisterOpen] = useState(false);
 
   const handleImageDownload = async () => {
     const element = document.getElementById('print-image');
@@ -54,6 +58,9 @@ const sideBar = ({}: IProps) => {
 
         {!!navigator.share && <Button buttonText='Share' onClick={() => handleImageShare()} /> }
         <Button buttonText='Download' onClick={handleImageDownload} />
+        <Button buttonText='Register' onClick={() => setEmailRegisterOpen(true)} />
+        {EmailRegisterOpen && <EmailRegister onClose={() => setEmailRegisterOpen(false)} />}
+
     </div>
   )
 }
