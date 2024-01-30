@@ -51,7 +51,8 @@ const sideBar = ({}: IProps) => {
   return (
     <div className="flex items-center w-full my-2 justify-around">
         <Button buttonText='Reset' onClick={() => window.location.reload()} />
-        <Button buttonText='Share' onClick={handleImageShare} />
+
+        {!!navigator.share && <Button buttonText='Share' onClick={() => handleImageShare()} /> }
         <Button buttonText='Download' onClick={handleImageDownload} />
     </div>
   )
