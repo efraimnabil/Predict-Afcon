@@ -137,7 +137,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
             {final ?
               <Cup className='w-12' />
               :
-              <p className='text-sm'>VS</p>
+              <p className='text-sm user-select-none'>VS</p>
             }
 
             {team2 ?
