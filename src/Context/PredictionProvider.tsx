@@ -21,7 +21,7 @@ interface PredictionProviderProps {
 const PredictionProvider = ({ children }: PredictionProviderProps) => {
   const [prediction, setPrediction] = useState({
     places: {
-      quarter: [],
+      quarter: ['ZAF', 'CPV', 'AGO', 'NGA', 'GIN', 'COD', 'CIV', 'MLI'],
       semi: [],
       final: [],
       winner: [],
