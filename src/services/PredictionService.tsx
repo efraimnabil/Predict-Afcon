@@ -21,6 +21,5 @@ interface EmailRegisterPayload {
 
 export async function createPrediction(payload: EmailRegisterPayload) {
   const response = await axios.post(baseUrl, payload);
-  console.error(response);
   return response.data;
 }

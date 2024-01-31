@@ -43,14 +43,15 @@ const EmailRegister = ({ onClose }: IProps) => {
 
       console.log(payload);
 
-      const response = await createPrediction(payload);
-      console.log(response);
-      toast.success('Email registered successfully');
+      await createPrediction(payload);
+      toast.success('Prediction registered successfully');
       onClose();
-    } catch (error) {
-      console.log(error);
-      toast.error('Something went wrong');
-      console.log(prediction);
+    } catch (error: any) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An unexpected error occurred.');
+      }
     } finally {
       setIsLoading(false);
     }
