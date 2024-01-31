@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { usePrediction } from '../Context/PredictionProvider';
+import { createPrediction } from '../services/PredictionService';
+
+import toast from 'react-hot-toast';
 
 interface IProps {
   onClose: () => void;
 }
 
 const EmailRegister = ({ onClose }: IProps) => {
+
+  const { prediction } = usePrediction();
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleModalClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // Stop the propagation of the click event inside the modal content
     event.stopPropagation();
   };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    return emailRegex.test(email);
+  }
+
+  const handleRegister = async () => {
+    try {
+      if (validateEmail(email)) {
+        setIsLoading(true);
+        const payload = {
+          email,
+          prediction,
+        };
+        const response = await createPrediction(payload);
+        console.log(response);
+        onClose();
+        setIsLoading(false);
+      } else {
+        toast.error('Invalid email');
+      }
+    } catch (err) {
+      toast.error('Something went wrong');
+    }
+  };
+
 
   return (
     <div
@@ -38,13 +72,15 @@ const EmailRegister = ({ onClose }: IProps) => {
           type="text"
           placeholder="Email"
           className="border border-primary bg-transparent rounded-2xl py-2 px-3 text-primary text-sm md:text-xl"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <button
-          onClick={onClose}
+          onClick={handleRegister}
           className="border border-primary rounded-xl py-1 px-3 text-primary text-sm md:text-xl hover:bg-primary hover:text-white"
         >
-          Register
+          {isLoading ? 'Loading...' : 'Register'}
         </button>
       </div>
     </div>

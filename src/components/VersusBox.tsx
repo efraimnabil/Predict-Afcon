@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Team from "./Team"
 import Cup from './UI/Cup'
-import { useMap } from './../Context/MapContext';
+import { useMap } from '../Context/MapProvider';
+import { usePrediction } from '../Context/PredictionProvider';
 
 interface IProps {
   team1?: string,
@@ -13,6 +14,8 @@ interface IProps {
 
 const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
   const { map } = useMap();
+  const { prediction, updatePrediction } = usePrediction();
+
   const [droppedTeam1, setDroppedTeam1] = useState<{ name: string, fromBox: number } | null>(null);
   const [droppedTeam2, setDroppedTeam2] = useState<{ name: string, fromBox: number } | null>(null);
   const [isDragOver1, setIsDragOver1] = useState(false);
@@ -23,6 +26,7 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
     e.preventDefault();
   }
 
+
   const handleOnDrop1 = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver1(false);
@@ -32,6 +36,17 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
     if (map.get(team.fromBox) !== boxNumber || droppedTeam2?.fromBox === team.fromBox) {
       return;
     }
+
+    if (boxNumber <= 12){
+      updatePrediction('quarter', [...prediction.places.quarter, team.name]);
+    }
+    else if (boxNumber <= 14){
+      updatePrediction('semi', [...prediction.places.semi, team.name]);
+    }
+    else if (boxNumber <= 15){
+      updatePrediction('final', [...prediction.places.final, team.name]);
+    }
+    console.log(prediction);
 
     setDroppedTeam1(team);
   }
@@ -45,6 +60,17 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
     if (map.get(team.fromBox) !== boxNumber || droppedTeam1?.fromBox === team.fromBox) {
       return;
     }
+
+    if (boxNumber <= 12){
+      updatePrediction('quarter', [...prediction.places.quarter, team.name]);
+    }
+    else if (boxNumber <= 14){
+      updatePrediction('semi', [...prediction.places.semi, team.name]);
+    }
+    else if (boxNumber <= 15){
+      updatePrediction('final', [...prediction.places.final, team.name]);
+    }
+    console.log(prediction);
 
     setDroppedTeam2(team);
   }
