@@ -16,7 +16,7 @@ const KnockoutStage = ({}: IProps) => {
           
           <Column matchesCount={4} roundTeams={['ZAF', 'MAR', 'MRT', 'CPV', 'NAM', 'AGO', 'CMR', 'NGA']} countStart={1} />
           
-          <Column matchesCount={2} countStart={9} />
+          <Column matchesCount={2} countStart={9} roundTeams={['ZAF', 'CPV', 'AGO', 'NGA']} />
           
           <Column matchesCount={1} countStart={13} />
           
@@ -24,7 +24,7 @@ const KnockoutStage = ({}: IProps) => {
           
           <Column matchesCount={1} countStart={14} />
           
-          <Column matchesCount={2} countStart={11} />
+          <Column matchesCount={2} countStart={11} roundTeams={['GIN', 'COD', 'CIV', 'MLI']} />
           
           <Column matchesCount={4} roundTeams={['GIN', 'GNQ', 'COD', 'EGY', 'CIV', 'SEN', 'BFA', 'MLI']} countStart={5} />
         </div>
