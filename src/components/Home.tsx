@@ -1,10 +1,7 @@
 import Cup from "./UI/Cup"
 import { Link } from "react-router-dom"
-interface IProps {
 
-}
-
-const Home = ({}: IProps) => {
+const Home = () => {
   return (
     <div className="relative flex flex-col p-4 mt-10 items-center gap-5 w-full lg:flex-row lg:py-10 lg:justify-around">
         
@@ -13,6 +10,9 @@ const Home = ({}: IProps) => {
                 Predict the results of the African Cup of Nations
             </h1>
 
+            <h3 className="text-secondary font-semibold md:text-xl">
+                Register your email to get notified when the AFCON ends to know the winner of the predictions
+            </h3>
             <h3 className="text-secondary font-semibold md:text-xl">
                 Download your predictions as an image and share on social media
             </h3>
