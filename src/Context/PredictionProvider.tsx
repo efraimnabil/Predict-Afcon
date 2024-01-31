@@ -6,9 +6,10 @@ interface PredictionContextProps {
       quarter: string[];
       semi: string[];
       final: string[];
+      winner: string[];
     };
   };
-  updatePrediction: (stage: 'quarter' | 'semi' | 'final', newData: string[]) => void;
+  updatePrediction: (stage: 'quarter' | 'semi' | 'final' | 'winner', newData: string[]) => void;
 }
 
 const PredictionContext = createContext<PredictionContextProps | undefined>(undefined);
@@ -23,10 +24,11 @@ const PredictionProvider = ({ children }: PredictionProviderProps) => {
       quarter: [],
       semi: [],
       final: [],
+      winner: [],
     },
   });
 
-  const updatePrediction = (stage: 'quarter' | 'semi' | 'final', newData: string[]) => {
+  const updatePrediction = (stage: 'quarter' | 'semi' | 'final' | 'winner', newData: string[]) => {
     setPrediction((prevPrediction) => ({
       ...prevPrediction,
       places: {

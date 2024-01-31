@@ -11,7 +11,11 @@ interface IProps {
 const EmailRegister = ({ onClose }: IProps) => {
 
   const { prediction } = usePrediction();
-  const [email, setEmail] = useState('');
+  const [user , setUser] = useState({
+    username: '',
+    email: ''
+  });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleModalClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -24,24 +28,41 @@ const EmailRegister = ({ onClose }: IProps) => {
   }
 
   const handleRegister = async () => {
+    if (!validateEmail(user.email)) {
+      toast.error('Please enter a valid email');
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      if (validateEmail(email)) {
-        setIsLoading(true);
-        const payload = {
-          email,
-          prediction,
-        };
-        const response = await createPrediction(payload);
-        console.log(response);
-        onClose();
-        setIsLoading(false);
-      } else {
-        toast.error('Invalid email');
-      }
-    } catch (err) {
+
+      const payload = {
+        user,
+        places: prediction.places
+      };
+
+      console.log(payload);
+
+      const response = await createPrediction(payload);
+      console.log(response);
+      toast.success('Email registered successfully');
+      onClose();
+    } catch (error) {
+      console.log(error);
       toast.error('Something went wrong');
+      console.log(prediction);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value
+    }));
+  }
 
 
   return (
@@ -68,17 +89,28 @@ const EmailRegister = ({ onClose }: IProps) => {
           Register your email to get notified when the AFCON ends to know the winner of the predictions
         </p>
 
+        <input 
+          type="text" 
+          name='username'
+          placeholder="Username" 
+          className="border border-primary bg-transparent rounded-2xl py-2 px-3 text-primary text-sm md:text-xl" 
+          value={user.username}
+          onChange={handleChange}
+        />
+
         <input
           type="text"
+          name='email'
           placeholder="Email"
           className="border border-primary bg-transparent rounded-2xl py-2 px-3 text-primary text-sm md:text-xl"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={user.email}
+          onChange={handleChange}
         />
 
         <button
           onClick={handleRegister}
           className="border border-primary rounded-xl py-1 px-3 text-primary text-sm md:text-xl hover:bg-primary hover:text-white"
+          disabled={isLoading}
         >
           {isLoading ? 'Loading...' : 'Register'}
         </button>

@@ -7,20 +7,20 @@ interface PredictionData {
     quarter: string[];
     semi: string[];
     final: string[];
+    winner: string[];
   };
 }
 
 interface EmailRegisterPayload {
-  email: string;
-  prediction: PredictionData;
+  user: {
+    username: string;
+    email: string;
+  };
+  places: PredictionData['places'];
 }
 
 export async function createPrediction(payload: EmailRegisterPayload) {
   const response = await axios.post(baseUrl, payload);
+  console.error(response);
   return response.data;
-}
-
-export async function getPredictions(){
-    const response = await axios.get(baseUrl);
-    return response.data;
 }

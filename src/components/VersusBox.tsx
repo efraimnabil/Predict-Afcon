@@ -46,7 +46,9 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
     else if (boxNumber <= 15){
       updatePrediction('final', [...prediction.places.final, team.name]);
     }
-    console.log(prediction);
+    else if (boxNumber === 16){
+      updatePrediction('winner', [...prediction.places.winner, team.name]);
+    }
 
     setDroppedTeam1(team);
   }
@@ -70,7 +72,9 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
     else if (boxNumber <= 15){
       updatePrediction('final', [...prediction.places.final, team.name]);
     }
-    console.log(prediction);
+    else if (boxNumber === 16){
+      updatePrediction('winner', [...prediction.places.winner, team.name]);
+    }
 
     setDroppedTeam2(team);
   }
