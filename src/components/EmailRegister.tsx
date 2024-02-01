@@ -110,7 +110,7 @@ const EmailRegister = ({ onClose }: IProps) => {
 
         <button
           onClick={handleRegister}
-          className="border border-primary rounded-xl py-1 px-3 text-primary text-sm md:text-xl hover:bg-primary hover:text-white"
+          className="border border-primary rounded-xl py-1 px-3 text-primary text-sm md:text-xl hover:bg-primary hover:text-white transform active:scale-90 transition duration-150"
           disabled={isLoading}
         >
           {isLoading ? 'Loading...' : 'Register'}

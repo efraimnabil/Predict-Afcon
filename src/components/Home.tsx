@@ -23,7 +23,7 @@ const Home = () => {
 
             <Link 
                 to="/knockout"
-                className="border border-primary text-primary rounded-3xl py-3 px-8 self-start md:text-xl"
+                className="border border-primary text-primary rounded-3xl py-3 px-8 self-start md:text-xl hover:bg-primary hover:text-white transform active:scale-90 transition duration-150"
             >
                 Get Started
             </Link>

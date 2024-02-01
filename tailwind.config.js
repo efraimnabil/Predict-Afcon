@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     extend: {
+      scale: ['active'],
       colors: {
       'forground': 'rgb(255, 255, 255)',
       'background': '#191B21',
