@@ -1,14 +1,26 @@
 import html2canvas from "html2canvas";
 import Button from "./UI/Button";
 import { useState } from "react";
+import { usePrediction } from "../Context/PredictionProvider";
+import { toast } from "react-hot-toast";
 import EmailRegister from "./EmailRegister";
-interface IProps {
 
-}
 
-const sideBar = ({}: IProps) => {
+const Navbar = () => {
+
+  const { prediction } = usePrediction();
 
   const [EmailRegisterOpen, setEmailRegisterOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+
+    if (prediction.places.winner.length == 0) {
+      toast.error('Please fill all the boxes');
+      return;
+    }
+
+    setEmailRegisterOpen(true);
+  }
 
   const handleImageDownload = async () => {
     const element = document.getElementById('print-image');
@@ -58,11 +70,11 @@ const sideBar = ({}: IProps) => {
 
         {!!navigator.share && <Button buttonText='Share' onClick={() => handleImageShare()} /> }
         <Button buttonText='Download' onClick={handleImageDownload} />
-        <Button buttonText='Register' onClick={() => setEmailRegisterOpen(true)} />
+        <Button buttonText='Register' onClick={handleRegisterClick} />
         {EmailRegisterOpen && <EmailRegister onClose={() => setEmailRegisterOpen(false)} />}
 
     </div>
   )
 }
 
-export default sideBar
+export default Navbar
