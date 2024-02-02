@@ -1,4 +1,4 @@
-import Cup from "./UI/Cup"
+import Cup from "../components/UI/Cup"
 import { Link } from "react-router-dom"
 
 const Home = () => {
@@ -13,13 +13,14 @@ const Home = () => {
             <h3 className="text-secondary font-semibold md:text-xl">
                 Register your email to get notified when the AFCON ends to know the winner of the predictions
             </h3>
+
             <h3 className="text-secondary font-semibold md:text-xl">
                 Download your predictions as an image and share on social media
             </h3>
+
             <h3 className="text-secondary font-semibold md:text-xl">
                 Share your predictions with your friends
             </h3>
-
 
             <Link 
                 to="/knockout"

@@ -1,7 +1,7 @@
 import { MapProvider } from './Context/MapProvider';
-import KnockoutStage from './components/KnockoutStage';
+import KnockoutStage from './pages/KnockoutStage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './pages/Home';
 import { PredictionProvider } from './Context/PredictionProvider';
 import { Toaster } from 'react-hot-toast';
 

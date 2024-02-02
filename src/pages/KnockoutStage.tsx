@@ -1,6 +1,6 @@
-import Column from './Column';
-import Final from './Final';
-import Navbar from './Navbar';
+import Column from '../components/Column';
+import Final from '../components/Final';
+import Navbar from '../components/Navbar';
 interface IProps {
 
 }
