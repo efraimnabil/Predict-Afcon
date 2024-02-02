@@ -40,7 +40,9 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
 
     if (map.get(droppedTeam.fromBox) !== boxNumber ||
         (team === 'team1' && droppedTeam2?.fromBox === droppedTeam.fromBox) ||
-        (team === 'team2' && droppedTeam1?.fromBox === droppedTeam.fromBox) ){
+        (team === 'team2' && droppedTeam1?.fromBox === droppedTeam.fromBox) ||
+        (droppedTeam.fromBox === 10 ||  droppedTeam.fromBox == 11)
+        ){
           setIsDragOver(null);
       return;
     }
