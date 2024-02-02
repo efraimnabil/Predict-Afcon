@@ -41,8 +41,6 @@ const EmailRegister = ({ onClose }: IProps) => {
         places: prediction.places
       };
 
-      console.log(payload);
-
       await createPrediction(payload);
       toast.success('Prediction registered successfully');
       onClose();

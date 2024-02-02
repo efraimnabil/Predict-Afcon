@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Team from "./Team"
 import Cup from './UI/Cup'
+import EmptyBox from './EmptyBox';
+import TeamBox from './TeamBox';
 import { useMap } from '../Context/MapProvider';
 import { usePrediction } from '../Context/PredictionProvider';
 
@@ -18,121 +20,107 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
 
   const [droppedTeam1, setDroppedTeam1] = useState<{ name: string, fromBox: number } | null>(null);
   const [droppedTeam2, setDroppedTeam2] = useState<{ name: string, fromBox: number } | null>(null);
-  const [isDragOver1, setIsDragOver1] = useState(false);
-  const [isDragOver2, setIsDragOver2] = useState(false);
+  const [isDragOver, setIsDragOver] = useState<string | null>(null);
 
 
   const handleOnDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   }
 
-
-  const handleOnDrop1 = (e: React.DragEvent) => {
+  const handleOnDrop = (e: React.DragEvent, team: 'team1' | 'team2') => {
     e.preventDefault();
-    setIsDragOver1(false);
+    if (team === 'team1') {
+      setIsDragOver('team1');
+    } else {
+      setIsDragOver('team2');
+    }
+  
     const data = e.dataTransfer.getData("text/plain");
-    const team = JSON.parse(data);
+    const droppedTeam = JSON.parse(data);
 
-    if (map.get(team.fromBox) !== boxNumber || droppedTeam2?.fromBox === team.fromBox) {
+    if (map.get(droppedTeam.fromBox) !== boxNumber ||
+        (team === 'team1' && droppedTeam2?.fromBox === droppedTeam.fromBox) ||
+        (team === 'team2' && droppedTeam1?.fromBox === droppedTeam.fromBox) ){
+          setIsDragOver(null);
       return;
     }
-
+  
     if (boxNumber <= 12){
-      updatePrediction('quarter', [...prediction.places.quarter, team.name]);
+      updatePrediction('quarter', [...prediction.places.quarter, droppedTeam.name]);
+    } else if (boxNumber <= 14){
+      updatePrediction('semi', [...prediction.places.semi, droppedTeam.name]);
+    } else if (boxNumber <= 15){
+      updatePrediction('final', [...prediction.places.final, droppedTeam.name]);
+    } else if (boxNumber === 16){
+      updatePrediction('winner', [...prediction.places.winner, droppedTeam.name]);
     }
-    else if (boxNumber <= 14){
-      updatePrediction('semi', [...prediction.places.semi, team.name]);
+  
+    if (team === 'team1') {
+      setDroppedTeam1(droppedTeam);
+    } else {
+      setDroppedTeam2(droppedTeam);
     }
-    else if (boxNumber <= 15){
-      updatePrediction('final', [...prediction.places.final, team.name]);
-    }
-    else if (boxNumber === 16){
-      updatePrediction('winner', [...prediction.places.winner, team.name]);
-    }
-
-    setDroppedTeam1(team);
   }
 
-  const handleOnDrop2 = (e: React.DragEvent) => {
+  const handleDragEnter = (e: React.DragEvent, team: 'team1' | 'team2') => {
     e.preventDefault();
-    setIsDragOver2(false);
-    const data = e.dataTransfer.getData("text/plain");
-    const team = JSON.parse(data);
-
-    if (map.get(team.fromBox) !== boxNumber || droppedTeam1?.fromBox === team.fromBox) {
-      return;
+    if (team === 'team1') {
+      setIsDragOver('team1')
+    } else {
+      setIsDragOver('team2')
     }
-
-    if (boxNumber <= 12){
-      updatePrediction('quarter', [...prediction.places.quarter, team.name]);
-    }
-    else if (boxNumber <= 14){
-      updatePrediction('semi', [...prediction.places.semi, team.name]);
-    }
-    else if (boxNumber <= 15){
-      updatePrediction('final', [...prediction.places.final, team.name]);
-    }
-    else if (boxNumber === 16){
-      updatePrediction('winner', [...prediction.places.winner, team.name]);
-    }
-
-    setDroppedTeam2(team);
   }
 
-  const handleDragEnter1 = (e: React.DragEvent) => {
+  const handleDragLeave = (e: React.DragEvent, team: 'team1' | 'team2') => {
     e.preventDefault();
-    setIsDragOver1(true);
+    if (team === 'team1') {
+      setIsDragOver(null);
+    } else {
+      setIsDragOver(null);
+    }
   }
 
-  const handleDragLeave1 = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver1(false);
-  }
-
-  const handleDragEnter2 = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver2(true);
-  }
-
-  const handleDragLeave2 = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver2(false);
+  const VersusBoxTitle = ({ winner, final }: { winner?: boolean, final?: boolean }) => {
+    return (
+      <>
+        {winner && <p className='p-2 text-primary select-none'>Winner</p>}
+        {final && <h2 className='p-2 select-none'>Final</h2>}
+      </>
+    )
   }
 
   return (
     <div className={`flex flex-col items-center justify-center m-1 border ${winner ? 'border-primary' : 'border-white-30'} rounded-xl`}>
-      {winner && <p className='p-2 text-primary select-none'>Winner</p>}
+      <VersusBoxTitle winner={winner} final={final} />
       {winner ?
-        droppedTeam1 ? <Team teamName={droppedTeam1.name} fromBox={boxNumber} /> :
-        <div
-        className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver1 ? 'border-green-500' : 'border-primary'} rounded-xl`}
-        onDrop={handleOnDrop1}
-        onDragOver={handleOnDragOver}
-        onDragEnter={handleDragEnter1}
-        onDragLeave={handleDragLeave1}
-        >
-
-        </div>
+        droppedTeam1 ? 
+          <Team teamName={droppedTeam1.name} fromBox={boxNumber} />
+          :
+          <EmptyBox
+            isDragOver={isDragOver === 'team1'}
+            handleOnDrop={handleOnDrop}
+            handleOnDragOver={handleOnDragOver}
+            handleDragEnter={handleDragEnter}
+            handleDragLeave={handleDragLeave}
+            winner={winner}
+            team='team1'
+          />
 
         :
 
         <>
-          {final && <h2 className='p-2 select-none'>Final</h2>}
           <div className={`flex ${boxNumber >= 9 ? "flex-row" : "flex-col"} items-center justify-center xl:flex-row`}>
-            {team1 ?
-              <Team teamName={team1} fromBox={boxNumber} />
-              :
-              droppedTeam1 ?
-                <Team teamName={droppedTeam1.name} fromBox={boxNumber} />
-                :
-                <div
-                  className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver1 ? 'border-green-500' : 'border-white-30'} rounded-xl`}
-                  onDrop={handleOnDrop1}
-                  onDragOver={handleOnDragOver}
-                  onDragEnter={handleDragEnter1}
-                  onDragLeave={handleDragLeave1}
-                ></div>
-            }
+            <TeamBox 
+              teamName={team1} 
+              droppedTeam={droppedTeam1} 
+              isDragOver={isDragOver === 'team1'}
+              handleOnDrop={handleOnDrop}
+              handleOnDragOver={handleOnDragOver}
+              handleDragEnter={handleDragEnter}
+              handleDragLeave={handleDragLeave}
+              team='team1'
+              boxNumber={boxNumber}
+            />
 
             {final ?
               <Cup className='w-12' />
@@ -140,20 +128,17 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
               <p className='text-sm select-none'>VS</p>
             }
 
-            {team2 ?
-              <Team teamName={team2} fromBox={boxNumber} />
-              :
-              droppedTeam2 ?
-                <Team teamName={droppedTeam2.name} fromBox={boxNumber} />
-                :
-                <div
-                  className={`flex flex-col items-center justify-center px-6 py-7 m-2 border ${isDragOver2 ? 'border-green-500' : 'border-white-30'} rounded-xl`}
-                  onDrop={handleOnDrop2}
-                  onDragOver={handleOnDragOver}
-                  onDragEnter={handleDragEnter2}
-                  onDragLeave={handleDragLeave2}
-                ></div>
-            }
+            <TeamBox 
+              teamName={team2} 
+              droppedTeam={droppedTeam2} 
+              isDragOver={isDragOver === 'team2'}
+              handleOnDrop={handleOnDrop}
+              handleOnDragOver={handleOnDragOver}
+              handleDragEnter={handleDragEnter}
+              handleDragLeave={handleDragLeave}
+              team='team2'
+              boxNumber={boxNumber}
+            />
           </div>
         </>
       }
