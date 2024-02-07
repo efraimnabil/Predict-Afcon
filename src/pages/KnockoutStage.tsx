@@ -20,7 +20,7 @@ const KnockoutStage = ({}: IProps) => {
           
           <Column matchesCount={1} countStart={13} roundTeams={['NGA', 'ZAF']} />
           
-          <Final />
+          <Final teams1='NGA' />
           
           <Column matchesCount={1} countStart={14} roundTeams={['COD', 'CIV']} />
           
