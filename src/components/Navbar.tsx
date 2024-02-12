@@ -14,6 +14,11 @@ const Navbar = () => {
 
   const handleRegisterClick = () => {
 
+    if(1) {
+      toast("The AFCON is already over");
+      return;
+    }
+
     if (prediction.places.winner.length == 0) {
       toast.error('Please fill all the boxes');
       return;

@@ -7,7 +7,7 @@ interface IProps {
 
 const KnockoutStage = ({}: IProps) => {
   return (
-    <>
+    <div className='xl:h-screen w-screen'>
         <Navbar />
         <div 
           id='print-image' 
@@ -20,7 +20,7 @@ const KnockoutStage = ({}: IProps) => {
           
           <Column matchesCount={1} countStart={13} roundTeams={['NGA', 'ZAF']} />
           
-          <Final teams1='NGA' teams2='CIV' />
+          <Final teams1='NGA' teams2='CIV' winnerTeam='CIV' />
           
           <Column matchesCount={1} countStart={14} roundTeams={['COD', 'CIV']} />
           
@@ -28,7 +28,7 @@ const KnockoutStage = ({}: IProps) => {
           
           <Column matchesCount={4} roundTeams={['GIN', 'GNQ', 'COD', 'EGY', 'CIV', 'SEN', 'BFA', 'MLI']} countStart={5} />
         </div>
-    </>
+    </div>
 
   )
 }

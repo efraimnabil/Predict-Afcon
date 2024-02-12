@@ -94,8 +94,8 @@ const VersusBox = ({ team1, team2, boxNumber, final, winner }: IProps) => {
     <div className={`flex flex-col items-center justify-center m-1 border ${winner ? 'border-primary' : 'border-white-30'} rounded-xl`}>
       <VersusBoxTitle winner={winner} final={final} />
       {winner ?
-        droppedTeam1 ? 
-          <Team teamName={droppedTeam1.name} fromBox={boxNumber} />
+        (droppedTeam1 || team1)? 
+          <Team teamName={team1 || droppedTeam1?.name || ''} fromBox={boxNumber} />
           :
           <EmptyBox
             isDragOver={isDragOver === 'team1'}

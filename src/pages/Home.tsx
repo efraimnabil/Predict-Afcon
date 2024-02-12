@@ -28,6 +28,12 @@ const Home = () => {
             >
                 Get Started
             </Link>
+            <Link
+                to="/standing"
+                className="text-primary font-semibold md:text-xl"
+            >
+                Check the standing
+            </Link>
         </div>
         <Cup className="w-36 sm:w-48 lg:w-72" />
 
